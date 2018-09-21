@@ -1,0 +1,28 @@
+--projectName TestPck
+
+ClassName: Departamento
+    
+    AtributeName: codDepartamento - isAssociation: false - Agregation: none - Upper: 1
+        Codiciones:  Association: false - Many: false - Composite: false - CompositeOne: false
+        ~.domain.Departamento 
+    
+    AtributeName: nombreDepartamento - isAssociation: false - Agregation: none - Upper: 1
+        Codiciones:  Association: false - Many: false - Composite: false - CompositeOne: false
+        ~.domain.Departamento 
+    
+
+ClassName: Municipio
+    
+    AtributeName: codMunicipio - isAssociation: false - Agregation: none - Upper: 1
+        Codiciones:  Association: false - Many: false - Composite: false - CompositeOne: false
+        ~.domain.Municipio 
+    
+    AtributeName: nombreMunicipio - isAssociation: false - Agregation: none - Upper: 1
+        Codiciones:  Association: false - Many: false - Composite: false - CompositeOne: false
+        ~.domain.Municipio 
+    
+    AtributeName: departamento - isAssociation: false - Agregation: none - Upper: 1
+        Codiciones:  Association: false - Many: false - Composite: false - CompositeOne: false
+        ~.domain.Municipio 
+    
+
