@@ -1,0 +1,51 @@
+[module pruebaGen('http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[template public generate(m : Package)]
+[comment @main/]
+[generateRandomCode()/]
+[comment clouddeployconf()/]
+[/template]
+
+
+[template public generateRandomCode(m : Package)]
+[file ('randomCode.roo', false, 'UTF-8')]
+--projectName [m.name/]
+[m.eAllContents(Class).genTest()/]
+[/file]
+[/template]
+
+[template public genTest(cl : Class)]
+
+ClassName: [cl.name/]
+    [cl.attribute.genTestAtt()/]
+
+[/template]
+
+[template public genTestAtt(att : Property)]
+
+AtributeName: [att.name/] - isAssociation: [att.isAssociation()/] - Agregation: [att.aggregation/] - Upper: [upper/]
+    Codiciones:  Association: [att.isAssociation()/] - Many: [isMany()/] - Composite: [isComposite/] - CompositeOne: [isOppositeOne()/]
+    ~.domain.[att.owner.oclAsType(Class).name/] 
+
+[/template]
+
+
+[query public isByteArray(p : Property) : Boolean =
+	p.type.name = 'ByteArray'
+/]
+
+[query public isManyToMany(p : Property) : Boolean = 
+					not p.getOpposite().oclIsUndefined() and p.isMany() and p.getOpposite().isMany()
+/]
+
+[query public isOppositeOne(p : Property) : Boolean = 
+					not p.getOpposite().oclIsUndefined() and not p.getOpposite().isMany()
+/]
+
+[query public isMany(s : MultiplicityElement) : Boolean =
+	s.lower > 1 or s.upper = -1 or s.upper > 1 
+/]
+
+[query public isAssociation(p : Property) : Boolean =
+	not p.association.oclIsUndefined()
+/]
